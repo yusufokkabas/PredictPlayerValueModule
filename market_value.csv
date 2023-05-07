@@ -1,0 +1,501 @@
+id;player;Market value
+0;Kylian Mbappé;€180.00m
+1;Raheem Sterling;€128.00m
+2;Neymar;€128.00m
+3;Sadio Mané;€120.00m
+4;Mohamed Salah;€120.00m
+5;Harry Kane;€120.00m
+6;Kevin De Bruyne;€120.00m
+7;Jadon Sancho;€117.00m
+8;Lionel Messi;€112.00m
+9;Trent Alexander-Arnold;€99.00m
+10;Antoine Griezmann;€96.00m
+11;João Félix;€81.00m
+12;Kai Havertz;€81.00m
+13;Bernardo Silva;€80.00m
+14;N'Golo Kanté;€80.00m
+15;Leroy Sané;€80.00m
+16;Virgil van Dijk;€80.00m
+17;Paul Pogba;€80.00m
+18;Jan Oblak;€80.00m
+19;Eden Hazard;€80.00m
+20;Joshua Kimmich;€75.00m
+21;Erling Haaland;€72.00m
+22;Frenkie de Jong;€72.00m
+23;Paulo Dybala;€72.00m
+24;Serge Gnabry;€72.00m
+25;Saúl Ñíguez;€72.00m
+26;Roberto Firmino;€72.00m
+27;Alisson;€72.00m
+28;Marc-André ter Stegen;€72.00m
+29;Romelu Lukaku;€68.00m
+30;Christian Eriksen;€68.00m
+31;Matthijs de Ligt;€67.50m
+32;David Alaba;€65.00m
+33;Lautaro Martínez;€64.00m
+34;Rodri;€64.00m
+35;Sergej Milinkovic-Savic;€64.00m
+36;Marcus Rashford;€64.00m
+37;Andrew Robertson;€64.00m
+38;Dele Alli;€64.00m
+39;Timo Werner;€64.00m
+40;Raphaël Varane;€64.00m
+41;Heung-min Son;€64.00m
+42;Casemiro;€64.00m
+43;Alphonso Davies;€60.00m
+44;Aymeric Laporte;€60.00m
+45;Marco Verratti;€60.00m
+46;Mauro Icardi;€60.00m
+47;Cristiano Ronaldo;€60.00m
+48;Gabriel Jesus;€56.00m
+49;Arthur;€56.00m
+50;Ousmane Dembélé;€56.00m
+51;Lucas Hernández;€56.00m
+52;José Giménez;€56.00m
+53;Ederson;€56.00m
+54;Fabinho;€56.00m
+55;Harry Maguire;€56.00m
+56;Kalidou Koulibaly;€56.00m
+57;Philippe Coutinho;€56.00m
+58;Pierre-Emerick Aubameyang;€56.00m
+59;Robert Lewandowski;€56.00m
+60;Achraf Hakimi;€54.00m
+61;Federico Valverde;€54.00m
+62;Christian Pulisic;€54.00m
+63;Tanguy Ndombélé;€52.00m
+64;Richarlison;€52.00m
+65;Nicolas Pépé;€52.00m
+66;Marquinhos;€52.00m
+67;Jorginho;€52.00m
+68;Miralem Pjanic;€52.00m
+69;Sergio Agüero;€52.00m
+70;Leon Goretzka;€50.00m
+71;Houssem Aouar;€49.50m
+72;Declan Rice;€49.50m
+73;Gianluigi Donnarumma;€49.50m
+74;Mikel Oyarzabal;€48.00m
+75;Fabián Ruiz;€48.00m
+76;Davinson Sánchez;€48.00m
+77;Federico Chiesa;€48.00m
+78;James Maddison;€48.00m
+79;Bruno Fernandes;€48.00m
+80;Milan Skriniar;€48.00m
+81;Clément Lenglet;€48.00m
+82;Anthony Martial;€48.00m
+83;Riyad Mahrez;€48.00m
+84;Niklas Süle;€48.00m
+85;Marcelo Brozovic;€48.00m
+86;Lorenzo Insigne;€48.00m
+87;Stefan de Vrij;€48.00m
+88;Thibaut Courtois;€48.00m
+89;Alexandre Lacazette;€48.00m
+90;Koke;€48.00m
+91;Thiago;€48.00m
+92;Toni Kroos;€48.00m
+93;Rodrygo;€45.00m
+94;Ferran Torres;€45.00m
+95;Nicolò Zaniolo;€45.00m
+96;Vinícius Júnior;€45.00m
+97;Dayot Upamecano;€45.00m
+98;Martin Ödegaard;€45.00m
+99;Donny van de Beek;€44.00m
+100;Youri Tielemans;€44.00m
+101;Memphis Depay;€44.00m
+102;Wilfried Zaha;€44.00m
+103;Luis Alberto;€44.00m
+104;Mattéo Guendouzi;€40.50m
+105;Ibrahima Konaté;€40.50m
+106;Mason Mount;€40.50m
+107;Carlos Soler;€40.00m
+108;Rodrigo Bentancur;€40.00m
+109;Benjamin Pavard;€40.00m
+110;Giovani Lo Celso;€40.00m
+111;Denis Zakaria;€40.00m
+112;Tammy Abraham;€40.00m
+113;Ben Chilwell;€40.00m
+114;Iñaki Williams;€40.00m
+115;Kingsley Coman;€40.00m
+116;Thomas;€40.00m
+117;Moussa Dembélé;€40.00m
+118;Rúben Neves;€40.00m
+119;José Gayà;€40.00m
+120;Hakim Ziyech;€40.00m
+121;Raúl Jiménez;€40.00m
+122;Julian Brandt;€40.00m
+123;Wissam Ben Yedder;€40.00m
+124;Daniel Carvajal;€40.00m
+125;Rodrigo;€40.00m
+126;Ciro Immobile;€40.00m
+127;Kyle Walker;€40.00m
+128;Antonio Rüdiger;€40.00m
+129;Sergi Roberto;€40.00m
+130;Isco;€40.00m
+131;Alex Sandro;€40.00m
+132;Jordi Alba;€40.00m
+133;David de Gea;€40.00m
+134;Ilkay Gündogan;€40.00m
+135;Georginio Wijnaldum;€40.00m
+136;Eduardo Camavinga;€37.50m
+137;David Neres;€36.00m
+138;Ansu Fati;€36.00m
+139;Éder Militão;€36.00m
+140;Jonathan Ikoné;€36.00m
+141;Lucas Torreira;€36.00m
+142;Wilfred Ndidi;€36.00m
+143;Nicolò Barella;€36.00m
+144;André Onana;€36.00m
+145;Alessio Romagnoli;€36.00m
+146;John Stones;€36.00m
+147;João Cancelo;€36.00m
+148;Sébastien Haller;€36.00m
+149;Álvaro Morata;€36.00m
+150;Duván Zapata;€36.00m
+151;Mateo Kovacic;€36.00m
+152;Lukas Klostermann;€35.00m
+153;Raphaël Guerreiro;€35.00m
+154;Marcel Sabitzer;€35.00m
+155;Naby Keïta;€33.50m
+156;Joe Gomez;€33.50m
+157;Christopher Nkunku;€33.00m
+158;Aaron Wan-Bissaka;€32.00m
+159;Maxi Gómez;€32.00m
+160;Moussa Diaby;€32.00m
+161;Theo Hernández;€32.00m
+162;Diego Carlos;€32.00m
+163;Caglar Söyüncü;€32.00m
+164;Dani Ceballos;€32.00m
+165;Marcus Thuram;€32.00m
+166;Marco Asensio;€32.00m
+167;Ferland Mendy;€32.00m
+168;Lorenzo Pellegrini;€32.00m
+169;Ángel Correa;€32.00m
+170;Luka Jovic;€32.00m
+171;Alex Telles;€32.00m
+172;Harry Winks;€32.00m
+173;Nélson Semedo;€32.00m
+174;Ricardo Pereira;€32.00m
+175;Nabil Fekir;€32.00m
+176;Kepa;€32.00m
+177;Arkadiusz Milik;€32.00m
+178;Héctor Bellerín;€32.00m
+179;Lucas Ocampos;€32.00m
+180;Florian Thauvin;€32.00m
+181;Piotr Zielinski;€32.00m
+182;Andrea Belotti;€32.00m
+183;Filip Kostic;€32.00m
+184;Felipe Anderson;€32.00m
+185;Samuel Umtiti;€32.00m
+186;Allan;€32.00m
+187;Konstantinos Manolas;€32.00m
+188;Thorgan Hazard;€32.00m
+189;James Rodríguez;€32.00m
+190;Joel Matip;€32.00m
+191;Lucas Moura;€32.00m
+192;Ángel Di María;€32.00m
+193;Wojciech Szczesny;€32.00m
+194;Gareth Bale;€32.00m
+195;Karim Benzema;€32.00m
+196;Renan Lodi;€31.50m
+197;Dejan Kulusevski;€31.50m
+198;Sandro Tonali;€31.50m
+199;Ryan Sessegnon;€31.50m
+200;Callum Hudson-Odoi;€31.50m
+201;Dan-Axel Zagadou;€31.50m
+202;Alessandro Bastoni;€31.50m
+203;Dani Olmo;€31.50m
+204;Malcom;€30.50m
+205;Rúben Dias;€30.50m
+206;Joaquín Correa;€30.50m
+207;Jack Grealish;€30.50m
+208;Andrej Kramaric;€30.50m
+209;Wout Weghorst;€30.00m
+210;Alassane Plea;€30.00m
+211;Thomas Müller;€30.00m
+212;Leon Bailey;€29.50m
+213;Mason Greenwood;€29.00m
+214;Ozan Kabak;€29.00m
+215;Bruno Guimarães;€28.00m
+216;Diogo Jota;€28.00m
+217;Éverton;€28.00m
+218;Hirving Lozano;€28.00m
+219;Steven Bergwijn;€28.00m
+220;Presnel Kimpembe;€28.00m
+221;Issa Diop;€28.00m
+222;Alex Meret;€28.00m
+223;Abdou Diallo;€28.00m
+224;Thilo Kehrer;€28.00m
+225;Konrad Laimer;€28.00m
+226;Federico Bernardeschi;€28.00m
+227;Alejandro Grimaldo;€28.00m
+228;Nico Elvedi;€28.00m
+229;Victor Lindelöf;€28.00m
+230;Nathan Aké;€28.00m
+231;Kurt Zouma;€28.00m
+232;Benjamin Mendy;€28.00m
+233;Alex Oxlade-Chamberlain;€28.00m
+234;Nicolás Tagliafico;€28.00m
+235;Jordan Pickford;€28.00m
+236;Paco Alcácer;€28.00m
+237;Lucas Digne;€28.00m
+238;Matthias Ginter;€28.00m
+239;Kieran Trippier;€28.00m
+240;Kevin Volland;€28.00m
+241;Pablo Sarabia;€28.00m
+242;Bernd Leno;€28.00m
+243;Sergio Busquets;€28.00m
+244;Jordan Henderson;€28.00m
+245;Dani Parejo;€28.00m
+246;Aaron Ramsey;€28.00m
+247;Luis Suárez;€28.00m
+248;Phil Foden;€27.00m
+249;Victor Osimhen;€27.00m
+250;Samu Chukwueze;€27.00m
+251;Boubacar Kamara;€27.00m
+252;Merih Demiral;€27.00m
+253;Alex Iwobi;€25.50m
+254;Adama Traoré;€25.50m
+255;Corentin Tolisso;€25.50m
+256;Adrien Rabiot;€25.50m
+257;Tiemoué Bakayoko;€25.50m
+258;Iñigo Martínez;€25.50m
+259;Felipe;€25.50m
+260;Stefan Savic;€25.50m
+261;Gonzalo Higuaín;€25.50m
+262;Gabriel Martinelli;€25.00m
+263;Moise Kean;€25.00m
+264;Donyell Malen;€25.00m
+265;Patrik Schick;€25.00m
+266;Marco Reus;€25.00m
+267;Ismaïla Sarr;€24.50m
+268;Boubakary Soumaré;€24.50m
+269;Nikola Milenkovic;€24.00m
+270;Wesley;€24.00m
+271;Amine Harit;€24.00m
+272;Igor Zubeldia;€24.00m
+273;Cengiz Ünder;€24.00m
+274;Mikel Merino;€24.00m
+275;Dominic Calvert-Lewin;€24.00m
+276;David Brooks;€24.00m
+277;Yeray Álvarez;€24.00m
+278;Ayoze Pérez;€24.00m
+279;Rafa Silva;€24.00m
+280;Djené;€24.00m
+281;Stefano Sensi;€24.00m
+282;Thomas Lemar;€24.00m
+283;Oleksandr Zinchenko;€24.00m
+284;Ruben Loftus-Cheek;€24.00m
+285;André Silva;€24.00m
+286;Andreas Christensen;€24.00m
+287;Jonathan Tah;€24.00m
+288;Ante Rebic;€24.00m
+289;Emerson;€24.00m
+290;Yussuf Poulsen;€24.00m
+291;Danilo Pereira;€24.00m
+292;Idrissa Gueye;€24.00m
+293;Kerem Demirbay;€24.00m
+294;Callum Wilson;€24.00m
+295;Willian José;€24.00m
+296;Emre Can;€24.00m
+297;Granit Xhaka;€24.00m
+298;Mário Fernandes;€24.00m
+299;Thomas Meunier;€24.00m
+300;Julian Draxler;€24.00m
+301;Douglas Costa;€24.00m
+302;César Azpilicueta;€24.00m
+303;Toby Alderweireld;€24.00m
+304;Mats Hummels;€24.00m
+305;Florian Neuhaus;€23.00m
+306;Reinier;€22.50m
+307;Gabriel Veron;€22.50m
+308;Jonathan David;€22.50m
+309;William Saliba;€22.50m
+310;Reece James;€22.50m
+311;Lucas Paquetá;€22.50m
+312;Jules Koundé;€22.50m
+313;Marash Kumbulla;€22.50m
+314;Evan N'Dicka;€22.50m
+315;Alexander Isak;€22.50m
+316;Justin Kluivert;€22.50m
+317;Jeff Reine-Adélaïde;€22.50m
+318;Daniel James;€22.50m
+319;Scott McTominay;€22.50m
+320;Gianluca Mancini;€22.50m
+321;Tyrone Mings;€22.50m
+322;Gonçalo Guedes;€22.50m
+323;André Gomes;€22.50m
+324;Jean-Philippe Gbamin;€22.50m
+325;Morgan Sanson;€22.50m
+326;Leander Dendoncker;€22.50m
+327;Matteo Politano;€22.50m
+328;Yannick Carrasco;€22.50m
+329;Geoffrey Kondogbia;€22.50m
+330;Emil Forsberg;€22.50m
+331;Gylfi Sigurdsson;€22.50m
+332;Willian;€22.50m
+333;Edmond Tapsoba;€22.00m
+334;Matheus Cunha;€22.00m
+335;Milot Rashica;€22.00m
+336;Krzysztof Piatek;€21.50m
+337;Ross Barkley;€21.50m
+338;Pizzi;€21.50m
+339;Axel Witsel;€21.50m
+340;Nahitan Nández;€21.00m
+341;Mohamed Ihattaren;€20.00m
+342;Lisandro Martínez;€20.00m
+343;Max Aarons;€20.00m
+344;Bukayo Saka;€20.00m
+345;Youcef Atal;€20.00m
+346;Júnior Firpo;€20.00m
+347;Riccardo Orsolini;€20.00m
+348;Rafael Leão;€20.00m
+349;André Zambo Anguissa;€20.00m
+350;Nordi Mukiele;€20.00m
+351;Joelinton;€20.00m
+352;Sander Berge;€20.00m
+353;Weston McKennie;€20.00m
+354;Todd Cantwell;€20.00m
+355;Gaetano Castrovilli;€20.00m
+356;Kieran Tierney;€20.00m
+357;Franck Kessié;€20.00m
+358;Mauro Arambarri;€20.00m
+359;Yerry Mina;€20.00m
+360;Manuel Akanji;€20.00m
+361;Sergio Reguilón;€20.00m
+362;Mario Hermoso;€20.00m
+363;Angeliño;€20.00m
+364;Nemanja Maksimovic;€20.00m
+365;Robin Gosens;€20.00m
+366;Allan Saint-Maximin;€20.00m
+367;Aleksandr Golovin;€20.00m
+368;Jefferson Lerma;€20.00m
+369;Suat Serdar;€20.00m
+370;Gelson Martins;€20.00m
+371;Rodrigo de Paul;€20.00m
+372;Diego Llorente;€20.00m
+373;Duje Caleta-Car;€20.00m
+374;Thomas Strakosha;€20.00m
+375;Bryan Cristante;€20.00m
+376;Florian Grillitsch;€20.00m
+377;Eric Dier;€20.00m
+378;James Tarkowski;€20.00m
+379;Leandro Paredes;€20.00m
+380;Jordan Veretout;€20.00m
+381;Remo Freuler;€20.00m
+382;Gerard Deulofeu;€20.00m
+383;Abdoulaye Doucouré;€20.00m
+384;Jesús Corona;€20.00m
+385;Michael Keane;€20.00m
+386;Marcos Alonso;€20.00m
+387;Luka Milivojevic;€20.00m
+388;Marcel Halstenberg;€20.00m
+389;Sergio Canales;€20.00m
+390;Dries Mertens;€20.00m
+391;Henrikh Mkhitaryan;€20.00m
+392;Aleksandar Mitrovic;€20.00m
+393;Edinson Cavani;€20.00m
+394;Moussa Sissoko;€20.00m
+395;Leonardo Bonucci;€20.00m
+396;Dusan Tadic;€20.00m
+397;Ivan Rakitic;€20.00m
+398;Gerard Piqué;€20.00m
+399;Daley Blind;€20.00m
+400;Krépin Diatta;€19.00m
+401;Dodi Lukebakio;€19.00m
+402;Pau López;€19.00m
+403;Moussa Marega;€19.00m
+404;Domenico Berardi;€19.00m
+405;Marten de Roon;€19.00m
+406;Dennis Praet;€19.00m
+407;Oscar;€19.00m
+408;Francis Coquelin;€19.00m
+409;Amadou Diawara;€18.50m
+410;Gabriel Barbosa;€18.50m
+411;Julian Weigl;€18.50m
+412;Matías Vecino;€18.50m
+413;Paulinho;€18.50m
+414;João Pedro;€18.00m
+415;Rayan Cherki;€18.00m
+416;Antony;€18.00m
+417;Dwight McNeil;€18.00m
+418;Thiago Almada;€18.00m
+419;Emerson;€18.00m
+420;Benoît Badiashile;€18.00m
+421;Douglas Luiz;€18.00m
+422;Myron Boadu;€18.00m
+423;Calvin Stengs;€18.00m
+424;Exequiel Palacios;€18.00m
+425;Sergiño Dest;€18.00m
+426;Florentino;€18.00m
+427;Diogo Dalot;€18.00m
+428;Marc Cucurella;€18.00m
+429;Carles Aleñá;€18.00m
+430;Matheus Henrique;€17.50m
+431;Gabriel Magalhães;€17.50m
+432;Jean-Philippe Mateta;€17.50m
+433;Harvey Barnes;€17.50m
+434;Ismaël Bennacer;€17.50m
+435;Sean Longstaff;€17.50m
+436;Mouctar Diakhaby;€17.50m
+437;Christian Kouamé;€17.50m
+438;Nikola Vlasic;€17.50m
+439;Eric Bailly;€17.50m
+440;Harry Wilson;€17.50m
+441;Neal Maupay;€17.50m
+442;Ben Davies;€17.50m
+443;Fred;€17.50m
+444;Luke Shaw;€17.50m
+445;Mike Maignan;€17.50m
+446;Quincy Promes;€17.50m
+447;Michy Batshuayi;€17.50m
+448;Gabriel Paulista;€17.50m
+449;Ryan Fraser;€17.50m
+450;Jesse Lingard;€17.50m
+451;Danny Ings;€17.50m
+452;Suso;€17.50m
+453;Marc Bartra;€17.50m
+454;Thomas Delaney;€17.50m
+455;Josip Ilicic;€17.50m
+456;Anthony Lopes;€17.50m
+457;Kevin Kampl;€17.50m
+458;Ivan Perisic;€17.50m
+459;Mesut Özil;€17.50m
+460;Robin Koch;€17.00m
+461;Xaver Schlager;€17.00m
+462;Maximilian Arnold;€17.00m
+463;Carlos Vinícius;€16.00m
+464;Colin Dagba;€16.00m
+465;Luiz Felipe;€16.00m
+466;Trincão;€16.00m
+467;Raphinha;€16.00m
+468;Pau Torres;€16.00m
+469;Pablo Fornals;€16.00m
+470;Dusan Vlahovic;€16.00m
+471;Loren Morón;€16.00m
+472;Lucas Tousart;€16.00m
+473;Malang Sarr;€16.00m
+474;Joe Willock;€16.00m
+475;Unai Núñez;€16.00m
+476;Marc Roca;€16.00m
+477;Valentin Rongier;€16.00m
+478;Jarrod Bowen;€16.00m
+479;Tom Davies;€16.00m
+480;Fikayo Tomori;€16.00m
+481;Jonathan Bamba;€16.00m
+482;Kasper Dolberg;€16.00m
+483;Marcos Llorente;€16.00m
+484;Álvaro Odriozola;€16.00m
+485;Miguel Almirón;€16.00m
+486;Viktor Tsygankov;€16.00m
+487;Unai Simón;€16.00m
+488;Timothy Castagne;€16.00m
+489;Joachim Andersen;€16.00m
+490;Talisca;€16.00m
+491;Renato Sanches;€16.00m
+492;Wilmar Barrios;€16.00m
+493;Zeki Celik;€16.00m
+494;Lewis Cook;€16.00m
+495;Keita Baldé;€16.00m
+496;Breel Embolo;€16.00m
+497;Nadiem Amiri;€16.00m
+498;Lucas Vázquez;€16.00m
+499;Jeremie Boga;€16.00m
