@@ -4,7 +4,7 @@ from src.scripts.concatFiles import concatFiles
 df = pd.read_csv('src/data/cleaned_data.csv')
 
 # Display the first few rows
-print(df.head())
+print(df.head()) 
 
 # Get the dimensions of the DataFrame
 print(df.shape)
