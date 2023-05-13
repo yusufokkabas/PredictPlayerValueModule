@@ -1,12 +1,12 @@
 import pandas as pd
-from ydata_profiling import ProfileReport
 from src.scripts.concatFiles import concatFiles
+from src.scripts.filter_csv import filterMFDF
 df = pd.read_csv('src/data/cleaned_data.csv')
-
+mfdf=pd.read_csv('src/data/player_data.csv',sep=';')
 # Display the first few rows
 print(df.head()) 
-
-# Get the dimensions of the DataFrame
+filterMFDF(mfdf)
+# Get the dimensions of the DataFrames
 print(df.shape)
 
 # Get a summary of the DataFrame
