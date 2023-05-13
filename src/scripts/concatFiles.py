@@ -13,3 +13,5 @@ def concatFiles():
 
     # Write the cleaned data to a new CSV file
     merged_data.to_csv('src/data/cleaned_data.csv', index=False)
+
+    return merged_data
