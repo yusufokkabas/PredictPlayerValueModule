@@ -1,31 +1,45 @@
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from boruta import BorutaPy
+from sklearn.linear_model import Lasso, LinearRegression
+from sklearn.feature_selection import SelectFromModel
+
+
+from sklearn.feature_selection import RFECV
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
 
 def featureSelection(df):
-    print(df)
-    X = df.drop('market_value_in_eur', axis=1)  # Features
-    y = df['market_value_in_eur']  # Target variable
-    # Initialize a random forest classifier as the estimator
-    # Create a random forest classifier object
-    rf =RandomForestClassifier(n_estimators=200, n_jobs=-1, max_depth=5)
+    
+    X = df.drop('market_value_in_eur', axis=1)  # Adjust the column name accordingly
+    y = df['market_value_in_eur']  # Adjust the column name accordingly
 
-    # Create the Boruta feature selector object
-    boruta_selector = BorutaPy(rf, random_state=10, verbose=2)
+ 
 
-    # Fit the selector to your data
-    boruta_selector.fit(X.values, y.values)
+    # Create a Lasso regression model for feature selection
+    lasso_model = Lasso(alpha=0.1)
 
-    # Transform your dataset to keep only the selected features
-    X_selected = boruta_selector.transform(X.values)
-    # Convert X_selected to a DataFrame using the column names of the selected features
-    selected_features = X.columns[boruta_selector.support_]
-    X_selected_df = pd.DataFrame(X_selected, columns=selected_features)
+    # Fit the Lasso model to the data
+    lasso_model.fit(X, y)
 
-    # Concatenate the target variable (y) with the selected features (X_selected_df)
-    concatenated_df = pd.concat([y, X_selected_df], axis=1)
-    print(concatenated_df.columns)
+    # Select features based on non-zero coefficients from Lasso model
+    selected_features_lasso = X.columns[lasso_model.coef_ != 0]
 
+    # Create a SelectFromModel object with linear regression as the base model
+    selector = SelectFromModel(LinearRegression(), threshold=0.1)
+
+    # Fit the selector to the data
+    selector.fit(X, y)
+
+    # Select features based on the given threshold
+    selected_features_linear = X.columns[selector.get_support()]
+
+    # Print the selected features
+    print("Selected Features (Lasso):")
+    print(selected_features_lasso)
+
+    print("Selected Features (Linear Regression):")
+    print(selected_features_linear)
+    selected_features_lasso = np.append(selected_features_lasso, 'market_value_in_eur')
+    return df[selected_features_lasso]
 
 
