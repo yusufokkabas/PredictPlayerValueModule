@@ -2,7 +2,7 @@ import pandas as pd
 
 def concatFiles():
 # Read the CSV files, specifying the correct delimiter for both files
-    player_data = pd.read_csv('src/data/player_data.csv', sep=';')
+    player_data = pd.read_csv('src/data/player_statistics.csv', sep=';')
     market_value = pd.read_csv('src/data/players.csv', sep=';')
 
     # Merge the dataframes using the common property 'player' using a left join

@@ -6,7 +6,7 @@ def naValues(df):
 
     # Filter the DataFrame to show only rows with NA values
     rows_with_na = df[na_mask]
-
+    df_dropped = df.dropna()
     # Display the rows with NA values
-    print(rows_with_na)
-    print("Since there is no missing value in our dataset, We do not have to perform handling na values")
+    print(df_dropped)
+    return df_dropped
