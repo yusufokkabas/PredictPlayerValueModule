@@ -1,27 +1,32 @@
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from boruta import BorutaPy
+from sklearn.linear_model import Lasso, LinearRegression
+from sklearn.feature_selection import SelectFromModel
+
+
+
 
 def featureSelection(df):
-    X = df.drop('market_value_in_eur', axis=1)  # Features
-    y = df['market_value_in_eur']  # Target variable
-    # Initialize a random forest classifier as the estimator
-    # Create a random forest classifier object
-    rf = RandomForestClassifier(n_jobs=-1, class_weight='balanced', max_depth=5)
+    df=df.dropna()
+    X = df.drop('market_value_in_eur', axis=1)  
+    y = df['market_value_in_eur']  
+    
+ 
+    lasso_model = Lasso(alpha=0.1)
 
-        # Create the Boruta feature selector object
-    boruta_selector = BorutaPy(rf, n_estimators='auto', verbose=2, random_state=1)
+    lasso_model.fit(X, y)
 
-    # Fit the selector to your data
-    boruta_selector.fit(X, y)
+    selected_features_lasso = X.columns[lasso_model.coef_ != 0]
 
-    # Get the indices of the selected features
-    selected_features = np.where(boruta_selector.support_)[0]
+    selector = SelectFromModel(LinearRegression(), threshold=0.1)
 
-    # Transform your dataset to keep only the selected features
-    X_selected = boruta_selector.transform(X)
-    print(X_selected)
+    selector.fit(X, y)
 
+    # Print the selected features
+    print("Selected Features (Lasso):")
+    print(selected_features_lasso)
+
+    selected_features_lasso = np.append(selected_features_lasso, 'market_value_in_eur')
+    return df[selected_features_lasso]
 
 
