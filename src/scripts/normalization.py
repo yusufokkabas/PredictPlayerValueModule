@@ -10,4 +10,5 @@ def normalizeData(data):
 
     # Normalize the selected columns
     data[selected_columns] = scaler.fit_transform(data[selected_columns])
+    print("Progress columns has succesfully normalized\n" , data[selected_columns])
     return data
