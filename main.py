@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import cross_val_score
 from sklearn.svm import SVR
-import xgboost as xgb
+#import xgboost as xgb
 mfdf=pd.read_csv('src/data/player_statistics.csv',sep=';') 
 filterOutliers(mfdf)
 df=concatFiles()
@@ -42,9 +42,9 @@ def performLR(X,y):
     y_pred = linear_regression.predict(X_test)
 
     mse = mean_squared_error(y_test, y_pred)
-    print("Mean Squared Error(Logistic Regression):", mse)
+    print("Mean Squared Error(Linear Regression):", mse)
     r2 = r2_score(y_test, y_pred)
-    print("R-squared (Logistic Regression):", r2)
+    print("R-squared (Linear Regression):", r2)
 
 
 from sklearn.ensemble import GradientBoostingRegressor
