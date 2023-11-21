@@ -13,7 +13,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import cross_val_score
 from sklearn.svm import SVR
-#import xgboost as xgb
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, accuracy_score,r2_score
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+from sklearn.linear_model import LinearRegression
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.ensemble import AdaBoostRegressor
 mfdf=pd.read_csv('src/data/player_statistics.csv',sep=';') 
 filterOutliers(mfdf)
 df=concatFiles()
@@ -23,10 +31,6 @@ normalizedDf =normalizeData(encodedDf)
 finalData = featureSelection(normalizedDf)
 
 
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, accuracy_score,r2_score
-
-from sklearn.linear_model import LinearRegression
 
 X = finalData.drop('market_value_in_eur', axis=1)  
 y = finalData['market_value_in_eur'] 
@@ -55,9 +59,6 @@ def performGB(X,y):
 
     return player_predictions
 
-
-from sklearn.neighbors import KNeighborsRegressor
-
 def performkNN(X,y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
@@ -78,7 +79,6 @@ def performkNN(X,y):
 
     return player_predictions
 
-
 def performDT(X,y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
@@ -98,7 +98,6 @@ def performDT(X,y):
     player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
 
     return player_predictions
-
 
 def performLR(X,y):  
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
@@ -124,11 +123,92 @@ def performLR(X,y):
 
     return player_predictions
 
+def performSVM(X, y):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+
+    svm = SVR(C=1.0, gamma='scale', kernel='rbf', degree=3, coef0=0.0, shrinking=True, tol=1e-3, cache_size=200, verbose=False, max_iter=-1)  
+    prediction_extractor = PredictionExtractor(svm)
+
+    prediction_extractor.fit(X_train, y_train)
+
+    X_test_with_predictions = prediction_extractor.transform(X_test)
+
+    mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
+    print("Mean Squared Error(Support Vector Machine):", mse)
+    r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
+    print("R-squared (Support Vector Machine):", r2)
+
+    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
+
+    return player_predictions
+
+def performRandomForest(X, y):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+    random_forest = RandomForestRegressor(n_estimators=100, max_depth=None, min_samples_split=2, min_samples_leaf=1,
+                                           min_weight_fraction_leaf=0.0, max_leaf_nodes=None,
+                                           min_impurity_decrease=0.0, bootstrap=True,
+                                           oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False,
+                                           ccp_alpha=0.0, max_samples=None)
+
+    prediction_extractor = PredictionExtractor(random_forest)
+
+    prediction_extractor.fit(X_train, y_train)
+
+    X_test_with_predictions = prediction_extractor.transform(X_test)
+
+    mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
+    print("Mean Squared Error(Random Forest):", mse)
+    r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
+    print("R-squared (Random Forest):", r2)
+
+    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
+
+    return player_predictions
+
+def performLDA(X, y):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+
+    lda = LinearDiscriminantAnalysis()
+    prediction_extractor = PredictionExtractor(lda)
+
+    prediction_extractor.fit(X_train, y_train)
+
+    X_test_with_predictions = prediction_extractor.transform(X_test)
+
+    mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
+    print("Mean Squared Error(Linear Discriminant Analysis):", mse)
+    r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
+    print("R-squared (Linear Discriminant Analysis):", r2)
+
+    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
+
+    return player_predictions
+
+def performAdaBoost(X, y):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+
+    adaboost = AdaBoostRegressor(n_estimators=50, random_state=42)
+    prediction_extractor = PredictionExtractor(adaboost)
+
+    prediction_extractor.fit(X_train, y_train)
+
+    X_test_with_predictions = prediction_extractor.transform(X_test)
+
+    mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
+    print("Mean Squared Error(AdaBoost):", mse)
+    r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
+    print("R-squared (AdaBoost):", r2)
+
+    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
+
+    return player_predictions
+
 
 players_market_value = pd.read_csv('src/data/cleaned_data.csv') 
-
-
-
 finalData = pd.merge(finalData, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
 
 class PredictionExtractor(BaseEstimator, TransformerMixin):
@@ -150,15 +230,30 @@ performLR(X,y)
 performGB(X,y)
 performkNN(X,y)
 performDT(X,y)
-# Print the output of performLR function
+performSVM(X, y)
+performRandomForest(X, y)
+performLDA(X, y) 
+performAdaBoost(X, y)
 print("Output of Linear Regression model:")
 print(performLR(X,y))
-# Output of Gradient Boosting model
+
 print("Output of Gradient Boosting model:")
 print(performGB(X,y))
-# Output of K-Nearest Neighbors model
+
 print("Output of K-Nearest Neighbors model:")
 print(performkNN(X,y))
-# Output of Decision Tree model
+
 print("Output of Decision Tree model:")
 print(performDT(X,y))
+
+print("Output of Support Vector Machine model:")
+print(performSVM(X, y))
+
+print("Output of Random Forest model:")
+print(performRandomForest(X, y))
+
+print("Output of Linear Discriminant Analysis model:")
+print(performLDA(X, y))
+
+print("Output of AdaBoost model:")
+print(performAdaBoost(X, y))
