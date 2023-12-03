@@ -8,6 +8,8 @@ from sklearn.feature_selection import SelectFromModel
 
 def featureSelection(df):
     df=df.dropna()
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    print(df.columns)
     X = df.drop('market_value_in_eur', axis=1)  
     y = df['market_value_in_eur']  
     

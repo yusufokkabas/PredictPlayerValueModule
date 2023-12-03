@@ -1,8 +1,9 @@
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 def featureEncoding(data):
-    columns_to_drop = ['current_club_name','Age','player']
-    data=data.drop(columns_to_drop,axis=1)
+    columns_to_drop = ['statistics.teams.name', 'statistics.teams.logo', 'statistics.teams.team_id', 'statistics.game_infos.position', 'market_value_date','market_value_in_eur', 'photo', 'nationality', 'age', 'first_name', 'last_name','weight','height', 'name', 'season']
+    data = data.drop(columns_to_drop, axis=1)
+    # rest of your code
     categorical_columns = data.select_dtypes(include=['object']).columns
     encoder = OneHotEncoder()
     one_hot_encoded = encoder.fit_transform(data[categorical_columns])
