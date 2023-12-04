@@ -12,7 +12,7 @@ def filterOutliers(df):
     z_scores = np.abs(stats.zscore(df[numeric_cols]))
 
     # Identify outliers
-    outliers = df[(z_scores > 3).any(axis=1)]
+    outliers = df[(z_scores > 5).any(axis=1)]
 
     # Filter out outliers
     df = df.drop(outliers.index)
