@@ -26,6 +26,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.ensemble import AdaBoostRegressor
 mfdf=pd.read_csv('src/data/player_statistics.csv',sep=';') 
+mfdf['Age'] = mfdf['Age'].str.split('-').str[0].astype(int)
 filterOutliers(mfdf)
 df=concatFiles()
 df=naValues(df)
@@ -59,11 +60,10 @@ def performGB(X,y):
     print("Mean Squared Error(Gradient Boosting):", gb_mse)
     r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
     print("R-squared (Gradient Boosting):", r2)
-    # precision = precision_score(y_test, X_test_with_predictions["model_prediction"])
-    # recall = recall_score(y_test, X_test_with_predictions["model_prediction"])
-    # f1 = 2 * (precision * recall) / (precision + recall)
     player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
     player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
+    #float to int model_prediction
+    player_predictions['model_prediction'] = player_predictions['model_prediction'].astype(int)
     player_predictions.to_csv('src/data/predictionResults.csv', index=False)
     tz = pytz.timezone('UTC')
     current_datetime = datetime.datetime.now(tz)
@@ -269,8 +269,6 @@ print(performDT(X,y))
 print("Output of Random Forest model:")
 print(performRandomForest(X, y))
 
-print("Output of Linear Discriminant Analysis model:")
-print(performLDA(X, y))
 
 print("Output of AdaBoost model:")
 print(performAdaBoost(X, y))

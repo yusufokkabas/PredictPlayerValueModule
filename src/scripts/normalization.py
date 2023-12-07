@@ -1,14 +1,15 @@
 from sklearn.preprocessing import MinMaxScaler
+import numpy as np
 
 
 def normalizeData(data):
     # Create the MinMaxScaler object
     scaler = MinMaxScaler()
-    print(data.columns)
-    # Select the columns you want to normalize
-    selected_columns = ['PrgP', 'PrgC', 'PrgR']
-
+    
+    # Select the integer columns
+    selected_columns = data.select_dtypes(include=[np.number]).columns.tolist()
+    selected_columns.remove('market_value_in_eur')
     # Normalize the selected columns
     data[selected_columns] = scaler.fit_transform(data[selected_columns])
-    print("Progress columns has succesfully normalized\n" , data[selected_columns])
+    print("Numeric columns has succesfully normalized\n" , data[selected_columns])
     return data
