@@ -12,4 +12,5 @@ def normalizeData(data):
     # Normalize the selected columns
     data[selected_columns] = scaler.fit_transform(data[selected_columns])
     print("Numeric columns has succesfully normalized\n" , data[selected_columns])
+    data.to_csv('src/data/normalizedData.csv')
     return data

@@ -42,6 +42,18 @@ y = finalData['market_value_in_eur']
 
 
 from sklearn.ensemble import GradientBoostingRegressor
+# def age_adjustment(age):
+#     if age > 0.7:
+#         return 0.6
+#     elif age > 0.6:
+#         return 0.7
+#     elif age > 0.5:
+#         return 1.0
+#     elif age > 0.4:
+#         return 1.2
+#     else:
+#         return 1.4
+
 
 def performGB(X,y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
@@ -56,6 +68,7 @@ def performGB(X,y):
     prediction_extractor.fit(X_train, y_train)
 
     X_test_with_predictions = prediction_extractor.transform(X_test)
+    #X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
     gb_mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
     print("Mean Squared Error(Gradient Boosting):", gb_mse)
     r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
@@ -95,6 +108,7 @@ def performkNN(X,y):
     scores = cross_val_score(knn, X, y, cv=4)
     print("Cross-validation scores(kNN):", scores)
     print(scores.mean())
+   # X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
     mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
     print("Mean Squared Error(K-Nearest Neighbors):", mse)
     r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
@@ -117,6 +131,7 @@ def performDT(X,y):
     prediction_extractor.fit(X_train, y_train)
 
     X_test_with_predictions = prediction_extractor.transform(X_test)
+    #X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
     scores = cross_val_score(tree, X, y, cv=4)
     print("Cross-validation scores(Decision Tree):", scores)
     print(scores.mean())
@@ -139,7 +154,7 @@ def performLR(X,y):
     prediction_extractor.fit(X_train, y_train)
  
     X_test_with_predictions = prediction_extractor.transform(X_test)
-    # now, X_test_with_predictions dataframe includes an additional column "model_prediction" which holds the predicted market value by the model
+    #X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
     scores = cross_val_score(linear_regression, X, y, cv=4)
     print("Cross-validation scores(Linear Regression):", scores)
     print(scores.mean())
@@ -170,6 +185,7 @@ def performRandomForest(X, y):
     prediction_extractor.fit(X_train, y_train)
 
     X_test_with_predictions = prediction_extractor.transform(X_test)
+   # X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
     scores = cross_val_score(random_forest, X, y, cv=4)
     print("Cross-validation scores(Random Forest):", scores)
     print(scores.mean())
@@ -192,6 +208,7 @@ def performLDA(X, y):
     prediction_extractor.fit(X_train, y_train)
 
     X_test_with_predictions = prediction_extractor.transform(X_test)
+  #  X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
     scores = cross_val_score(lda, X, y, cv=4)
     print("Cross-validation scores(LDA):", scores)
     print(scores.mean())
@@ -214,6 +231,7 @@ def performAdaBoost(X, y):
     prediction_extractor.fit(X_train, y_train)
 
     X_test_with_predictions = prediction_extractor.transform(X_test)
+   # X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
     scores = cross_val_score(adaboost, X, y, cv=4)
     print("Cross-validation scores(AdaBoost):", scores)
     print(scores.mean())

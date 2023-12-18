@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 def featureEncoding(data):
-    columns_to_drop = ['current_club_name','player']
+    columns_to_drop = ['current_club_name','player','Born']
     data=data.drop(columns_to_drop,axis=1)
     categorical_columns = data.select_dtypes(include=['object']).columns
     encoder = OneHotEncoder()
