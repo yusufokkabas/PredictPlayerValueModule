@@ -3,7 +3,7 @@ import datetime
 import pandas as pd
 import numpy as np
 import pytz
-from src.scripts.dbConn import create_conn
+# from src.scripts.dbConn import create_conn
 from src.scripts.concatFiles import concatFiles
 from sklearn.base import BaseEstimator, TransformerMixin
 from src.scripts.filter_csv import filterOutliers
@@ -14,23 +14,22 @@ from src.scripts.featureEncoding import featureEncoding
 from src.scripts.normalization import normalizeData
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, precision_score, recall_score
-from sklearn.model_selection import cross_val_score
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import cross_val_score,KFold
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, accuracy_score,r2_score
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.pipeline import make_pipeline
+from sklearn.metrics import mean_squared_error,r2_score
 from sklearn.linear_model import LinearRegression
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.ensemble import AdaBoostRegressor
+import matplotlib.pyplot as plt
 mfdf=pd.read_csv('src/data/player_statistics.csv',sep=';') 
 mfdf['Age'] = mfdf['Age'].str.split('-').str[0].astype(int)
 filterOutliers(mfdf)
 df=concatFiles()
-df=naValues(df)
-encodedDf=featureEncoding(df)
+cleanedDf=naValues(df)
+encodedDf=featureEncoding(cleanedDf)
 normalizedDf =normalizeData(encodedDf)
 finalData = featureSelection(normalizedDf)
 
@@ -56,24 +55,23 @@ from sklearn.ensemble import GradientBoostingRegressor
 
 
 def performGB(X,y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
     gradient_boosting = GradientBoostingRegressor()
-
-    scores = cross_val_score(gradient_boosting, X, y, cv=4)
+    k_folds = KFold(n_splits = 10)
+    scores = cross_val_score(gradient_boosting, X, y, cv=k_folds)
     print("Cross-validation scores(Gradient Boosting):", scores)
     print(scores.mean())
-    prediction_extractor = PredictionExtractor(gradient_boosting)
-    
+    draw_cross_val(scores, 'Gradient Boosting')
+    prediction_extractor = PredictionExtractor(gradient_boosting) 
     prediction_extractor.fit(X_train, y_train)
-
     X_test_with_predictions = prediction_extractor.transform(X_test)
     #X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
     gb_mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
     print("Mean Squared Error(Gradient Boosting):", gb_mse)
     r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
     print("R-squared (Gradient Boosting):", r2)
-    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = pd.merge(X_test_with_predictions, cleanedDf[['player', 'market_value_in_eur']], left_index=True, right_index=True)
     player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
     #float to int model_prediction
     player_predictions['model_prediction'] = player_predictions['model_prediction'].astype(int)
@@ -97,7 +95,7 @@ def performGB(X,y):
     return player_predictions
 
 def performkNN(X,y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
     knn = KNeighborsRegressor(metric="euclidean")
     prediction_extractor = PredictionExtractor(knn)
@@ -105,9 +103,11 @@ def performkNN(X,y):
     prediction_extractor.fit(X_train, y_train)
 
     X_test_with_predictions = prediction_extractor.transform(X_test)
-    scores = cross_val_score(knn, X, y, cv=4)
+    k_folds = KFold(n_splits = 10)
+    scores = cross_val_score(knn, X, y, cv=k_folds)
     print("Cross-validation scores(kNN):", scores)
     print(scores.mean())
+    draw_cross_val(scores, 'K-Nearest Neighbors')
    # X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
     mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
     print("Mean Squared Error(K-Nearest Neighbors):", mse)
@@ -117,13 +117,13 @@ def performkNN(X,y):
     # recall = recall_score(y_test, X_test_with_predictions["model_prediction"])
     # f1 = 2 * (precision * recall) / (precision + recall)
 
-    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = pd.merge(X_test_with_predictions, cleanedDf[['player', 'market_value_in_eur']], left_index=True, right_index=True)
     player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
 
     return player_predictions
 
 def performDT(X,y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
     tree = DecisionTreeRegressor()
     prediction_extractor = PredictionExtractor(tree)
@@ -132,21 +132,23 @@ def performDT(X,y):
 
     X_test_with_predictions = prediction_extractor.transform(X_test)
     #X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
-    scores = cross_val_score(tree, X, y, cv=4)
+    k_folds = KFold(n_splits = 10)
+    scores = cross_val_score(tree, X, y, cv=k_folds)
     print("Cross-validation scores(Decision Tree):", scores)
     print(scores.mean())
+    draw_cross_val(scores, 'Decision Tree')
     mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
     print("Mean Squared Error(Decision Tree):", mse)
     r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
     print("R-squared (Decision Tree):", r2)
 
-    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = pd.merge(X_test_with_predictions, cleanedDf[['player', 'market_value_in_eur']], left_index=True, right_index=True)
     player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
 
     return player_predictions
 
 def performLR(X,y):  
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
     linear_regression = LinearRegression()
     prediction_extractor = PredictionExtractor(linear_regression)
@@ -155,16 +157,18 @@ def performLR(X,y):
  
     X_test_with_predictions = prediction_extractor.transform(X_test)
     #X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
-    scores = cross_val_score(linear_regression, X, y, cv=4)
+    k_folds = KFold(n_splits = 10)
+    scores = cross_val_score(linear_regression, X, y, cv=k_folds)
     print("Cross-validation scores(Linear Regression):", scores)
     print(scores.mean())
+    draw_cross_val(scores, 'Linear Regression')
     mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
     print("Mean Squared Error(Linear Regression):", mse)
     r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
     print("R-squared (Linear Regression):", r2)
 
     # Return player info along with actual and predicted market values
-    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = pd.merge(X_test_with_predictions, cleanedDf[['player', 'market_value_in_eur']], left_index=True, right_index=True)
     player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
 
  
@@ -173,7 +177,7 @@ def performLR(X,y):
 
 
 def performRandomForest(X, y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
     random_forest = RandomForestRegressor(n_estimators=100, max_depth=None, min_samples_split=2, min_samples_leaf=1,
                                            min_weight_fraction_leaf=0.0, max_leaf_nodes=None,
                                            min_impurity_decrease=0.0, bootstrap=True,
@@ -186,44 +190,25 @@ def performRandomForest(X, y):
 
     X_test_with_predictions = prediction_extractor.transform(X_test)
    # X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
-    scores = cross_val_score(random_forest, X, y, cv=4)
+    k_folds = KFold(n_splits = 10)
+    scores = cross_val_score(random_forest, X, y, cv=k_folds)
     print("Cross-validation scores(Random Forest):", scores)
     print(scores.mean())
+    draw_cross_val(scores, 'Random Forest')
     mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
     print("Mean Squared Error(Random Forest):", mse)
     r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
     print("R-squared (Random Forest):", r2)
 
-    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = pd.merge(X_test_with_predictions, cleanedDf[['player', 'market_value_in_eur']], left_index=True, right_index=True)
     player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
 
     return player_predictions
 
-def performLDA(X, y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
-    lda = LinearDiscriminantAnalysis()
-    prediction_extractor = PredictionExtractor(lda)
-
-    prediction_extractor.fit(X_train, y_train)
-
-    X_test_with_predictions = prediction_extractor.transform(X_test)
-  #  X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
-    scores = cross_val_score(lda, X, y, cv=4)
-    print("Cross-validation scores(LDA):", scores)
-    print(scores.mean())
-    mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
-    print("Mean Squared Error(Linear Discriminant Analysis):", mse)
-    r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
-    print("R-squared (Linear Discriminant Analysis):", r2)
-
-    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
-    player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
-
-    return player_predictions
 
 def performAdaBoost(X, y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
     adaboost = AdaBoostRegressor(n_estimators=50, random_state=42)
     prediction_extractor = PredictionExtractor(adaboost)
@@ -232,7 +217,9 @@ def performAdaBoost(X, y):
 
     X_test_with_predictions = prediction_extractor.transform(X_test)
    # X_test_with_predictions["model_prediction"] = np.array([pred * age_adjustment(age) for pred, age in zip(X_test_with_predictions["model_prediction"], X_test['Age'])])
-    scores = cross_val_score(adaboost, X, y, cv=4)
+    k_folds = KFold(n_splits = 10)
+    scores = cross_val_score(adaboost, X, y, cv=k_folds)
+    draw_cross_val(scores, 'AdaBoost')
     print("Cross-validation scores(AdaBoost):", scores)
     print(scores.mean())
     mse = mean_squared_error(y_test, X_test_with_predictions["model_prediction"])
@@ -240,15 +227,22 @@ def performAdaBoost(X, y):
     r2 = r2_score(y_test, X_test_with_predictions["model_prediction"])
     print("R-squared (AdaBoost):", r2)
 
-    player_predictions = pd.merge(X_test_with_predictions, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+    player_predictions = pd.merge(X_test_with_predictions, cleanedDf[['player', 'market_value_in_eur']], left_index=True, right_index=True)
     player_predictions = player_predictions[['player', 'market_value_in_eur', 'model_prediction']]
 
     return player_predictions
 
 
-players_market_value = pd.read_csv('src/data/cleaned_data.csv') 
-finalData = pd.merge(finalData, players_market_value[['player', 'market_value_in_eur']], left_index=True, right_index=True)
-
+finalData = pd.merge(finalData, cleanedDf[['player', 'market_value_in_eur']], left_index=True, right_index=True)
+ 
+def draw_cross_val(scores,algorithmName):
+    plt.figure(figsize=(10, 5))
+    plt.plot(range(1, len(scores) + 1), scores)
+    plt.xlabel('Fold number')
+    plt.ylabel('Cross-Validation Score')
+    plt.title('Cross-Validation Scores per Fold('+algorithmName+')')
+    plt.grid(True)
+    plt.show()
 class PredictionExtractor(BaseEstimator, TransformerMixin):
     def __init__(self, model):
         self.model = model
@@ -264,13 +258,9 @@ class PredictionExtractor(BaseEstimator, TransformerMixin):
 
 
 
-# performLR(X,y)
-# performGB(X,y)
-# performkNN(X,y)
-# performDT(X,y)
-# performRandomForest(X, y)
-# performLDA(X, y) 
-# performAdaBoost(X, y)
+
+    
+
 print("Output of Linear Regression model:")
 print(performLR(X,y))
 
