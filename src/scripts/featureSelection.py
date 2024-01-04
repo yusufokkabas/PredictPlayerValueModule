@@ -10,7 +10,9 @@ def featureSelection(df):
     X = df.drop('market_value_in_eur', axis=1)  
     y = df['market_value_in_eur']  
     
- 
+    # select only the numeric features
+    X = X.select_dtypes(include=[np.number])
+
     # Define the model
     model = ExtraTreesRegressor()
     
